@@ -1,0 +1,29 @@
+# Maintainer: Alex Creio <ctlos@protonmail.com>
+
+_gitname=ctlos-newaita
+pkgname=ctlos-newaita-icons
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Fork Newaita icon theme"
+arch=('i686' 'x86_64')
+url="https://github.com/ctlos/${_gitname}"
+license=('CC BY-NC-SA 3.0')
+makedepends=('git')
+options=('!strip')
+source=("git+${url}.git")
+sha256sums=('SKIP')
+
+pkgver(){
+    cd "${_gitname}"
+    ( set -o pipefail
+        git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+        printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+    )
+}
+
+package() {
+    install -d ${pkgdir}/usr/share/icons
+    cp -r ${_gitname}/ctlos-newaita* ${pkgdir}/usr/share/icons/
+    # find ${pkgdir}/usr -type f -exec chmod 644 {} \;
+    # find ${pkgdir}/usr -type d -exec chmod 755 {} \;
+}
