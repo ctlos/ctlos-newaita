@@ -2,7 +2,7 @@
 
 _gitname=ctlos-newaita
 pkgname=ctlos-newaita-icons
-pkgver=1.0.0
+pkgver=r928.8a488ed9f
 pkgrel=1
 pkgdesc="Fork Newaita icon theme"
 arch=('i686' 'x86_64')
